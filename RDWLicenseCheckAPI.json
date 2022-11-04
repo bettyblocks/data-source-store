@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "RDW License Check API",
+    "description": "RDW is the Netherlands Vehicle Authority in the mobility chain. RDW has developed extensive expertise through its years of experience in executing its statutory and assigned tasks.The RDW License Check API returns information about your car, it does this by your license plate. You can also retrieve information about other cars by brand.With this RDW Kenteken (Licence) Check API block, you can request different endpoints from your Betty Blocks application:Get vehicle information Get vehicle class Get cars by brand",
+    "contact": {
+      "email": "info@bettyblocks.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://itho-device-poc.betty.app/api/runtime"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Example",
+      "description": "Example"
+    }
+  ],
+  "paths": {
+    "/v1/Example": {
+      "get": {
+        "summary": "Example summary",
+        "operationId": "Example",
+        "responses": {
+          "200": {
+            "description": "Valid response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Example"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": ["write:users", "read:users"]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Example": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["Online", "Slow", "Offline", "Urgent"]
+          },
+          "lastOnlineDate": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "ExampleNumber": {
+            "type": "string"
+          },
+          "ExampleDescription": {
+            "type": "string"
+          },
+          "ExampleAddress": {
+            "type": "string"
+          },
+          "ExampleCode": {
+            "type": "string"
+          },
+          "Example": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Device"
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Postcode API",
+    "description": 
+    "Postcode API is an API that uses the Dutch BAG zipcode-database to give correct addresses that you can use in your application.
+    Postcode API has been developed for and by developers.
+     They put a lot of time and attention in a reliable,
+      easy-to-integrate API that scales flexibly with your application.
+       You can get started in no time with the API.With this PostcodeAPI API block,
+        you can request different endpoints from your Betty Blocks application:Get Address by BAG idGet Address of specific zipcodeGet Addresses by zipcode and numberGet Zipcodes by zipcode are"
+        ,
+    "contact": {
+      "email": "info@bettyblocks.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://itho-device-poc.betty.app/api/runtime"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Example",
+      "description": "Example"
+    }
+  ],
+  "paths": {
+    "/v1/Example": {
+      "get": {
+        "summary": "Example summary",
+        "operationId": "Example",
+        "responses": {
+          "200": {
+            "description": "Valid response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Example"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": ["write:users", "read:users"]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Example": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["Online", "Slow", "Offline", "Urgent"]
+          },
+          "lastOnlineDate": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "ExampleNumber": {
+            "type": "string"
+          },
+          "ExampleDescription": {
+            "type": "string"
+          },
+          "ExampleAddress": {
+            "type": "string"
+          },
+          "ExampleCode": {
+            "type": "string"
+          },
+          "Example": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Device"
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

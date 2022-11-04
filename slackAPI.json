@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Slack API",
+    "description": "Slack is a collaboration chat tool used both in and out of organizations to help teams communicate and coordinate in a more effective manner.The Slack API allows you to integrate your Betty Blocks application with Slack. The API is made that almost everything you can do in the app is also accessible via the Slack API. For example, you can get and create channels, lists, users and more.With this Slack API block, you can request different endpoints from your Betty Blocks application:Get information about a channelJoins a channel, creating it if neededGet Find a user with an email addressGet Lists &amp; filters team filesAnd many more!
+",
+    "contact": {
+      "email": "info@bettyblocks.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://itho-device-poc.betty.app/api/runtime"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Example",
+      "description": "Example"
+    }
+  ],
+  "paths": {
+    "/v1/Example": {
+      "get": {
+        "summary": "Example summary",
+        "operationId": "Example",
+        "responses": {
+          "200": {
+            "description": "Valid response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Example"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": ["write:users", "read:users"]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Example": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["Online", "Slow", "Offline", "Urgent"]
+          },
+          "lastOnlineDate": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "ExampleNumber": {
+            "type": "string"
+          },
+          "ExampleDescription": {
+            "type": "string"
+          },
+          "ExampleAddress": {
+            "type": "string"
+          },
+          "ExampleCode": {
+            "type": "string"
+          },
+          "Example": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Device"
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

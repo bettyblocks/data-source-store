@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Google Maps API",
+    "description": "Google has the world mapped. With more than one billion global monthly active users in over 200 countries, their data gives you accurate real-time information for mapping, navigation and places.With this Google Maps API block, you can request different endpoints from your Betty Blocks application:Get directions to the given addressGet distances between 2 addressesGet addresses by latitude and longitudeLookup time zones based on location and timestampAnd many more!",
+    "contact": {
+      "email": "info@bettyblocks.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://itho-device-poc.betty.app/api/runtime"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Example",
+      "description": "Example"
+    }
+  ],
+  "paths": {
+    "/v1/Example": {
+      "get": {
+        "summary": "Example summary",
+        "operationId": "Example",
+        "responses": {
+          "200": {
+            "description": "Valid response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Example"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": ["write:users", "read:users"]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Example": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["Online", "Slow", "Offline", "Urgent"]
+          },
+          "lastOnlineDate": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "ExampleNumber": {
+            "type": "string"
+          },
+          "ExampleDescription": {
+            "type": "string"
+          },
+          "ExampleAddress": {
+            "type": "string"
+          },
+          "ExampleCode": {
+            "type": "string"
+          },
+          "Example": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Device"
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}
