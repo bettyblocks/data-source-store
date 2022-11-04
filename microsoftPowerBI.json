@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "https://itho-device-poc.betty.app/api/runtime"
+      "url": "https://example.betty.app/api/runtime"
     }
   ],
   "tags": [
