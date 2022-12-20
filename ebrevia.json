@@ -684,7 +684,7 @@
                   "type": "array",
                   "example": "[1, 2, 3]",
                   "items": {
-                    "type": "integers"
+                    "type": "integer"
                   }
                 },
                 "state": {
@@ -794,6 +794,7 @@
             "type": "integer"
           },
           {
+            "name": "Blaat",
             "in": "body",
             "description": "The fields to be updated",
             "required": true,
