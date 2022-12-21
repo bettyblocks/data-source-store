@@ -3495,579 +3495,102 @@
     }
   },
   "responses": {},
-  "definitions": {
-    "row": {
-      "type": "object",
-      "properties": {
-        "docId": {
-          "type": "integer"
-        },
-        "title": {
-          "type": "string"
-        },
-        "filename": {
-          "type": "string"
-        },
-        "dir": {
-          "type": "string"
-        },
-        "file": {
-          "$ref": "#/definitions/filePath"
-        },
-        "drm": {
-          "type": "string"
-        },
-        "docStatus": {
-          "type": "string",
-          "enum": [
-            "PENDING",
-            "OCR",
-            "OCR_ERROR",
-            "PDF_CONVERT",
-            "PDF_CONVERT_ERROR",
-            "READY",
-            "EXTRACTING",
-            "EXTRACTING_ERROR",
-            "SUMMARIZED",
-            "NOT_ANALYZED",
-            "DOWNLOADING",
-            "DOWNLOAD_ERROR",
-            "NON_TEXT_DOCUMENT"
-          ]
-        },
-        "modByUsername": {
-          "type": "string"
-        },
-        "modByName": {
-          "type": "string"
-        },
-        "modDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "permissionLevel": {
-          "type": "string",
-          "enum": [
-            "EDIT",
-            "READONLY",
-            "OWNER",
-            "NONE",
-            "ERROR",
-            "REMOTE_RESTRICTED"
-          ]
-        },
-        "poorScan": {
-          "type": "boolean"
-        },
-        "formId": {
-          "type": "integer"
-        },
-        "isNonContract": {
-          "type": "boolean"
-        },
-        "groupId": {
-          "type": "integer"
-        }
-      }
-    },
-    "rows": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/row"
-      }
-    },
-    "summary": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "description": "the extracted data and annotations (note that actual fields may vary based on form)",
-          "additionalProperties": true
-        },
-        "modBy": {
-          "type": "object"
-        },
-        "modDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "UNREVIEWED",
-            "IN_PROCESS",
-            "COMPLETE"
-          ]
-        }
-      }
-    },
-    "annotation": {
-      "properties": {
-        "start": {
-          "description": "The beginning offset of the extracted text in the full document text. \n\n0 if text is manually entered by a human.",
-          "type": "integer"
-        },
-        "end": {
-          "description": "The ending offset of the extracted text in the full document text. \n\n0 if text is manually entered by a human.",
-          "type": "integer"
-        },
-        "type": {
-          "type": "string"
-        },
-        "text": {
-          "type": "string",
-          "description": "the actual extracted text for the field or the text manually entered by a human"
-        },
-        "confidence": {
-          "description": "eBrevia's confidence, from 0 to 1, that the extracted text is correct",
-          "type": "number"
-        },
-        "correctness": {
-          "type": "string"
-        },
-        "customText": {
-          "type": "boolean",
-          "description": "true if text for the field is manually entered by a human"
-        },
-        "manualEntry": {
-          "type": "boolean",
-          "description": "true if text for the field is manually entered by a human"
-        },
-        "docId": {
-          "type": "integer"
-        },
-        "docTitle": {
-          "type": "string"
-        },
-        "boxList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/boxListItem"
-          },
-          "description": "a list of rectangle box indicates the position of the table. \n present if annotation is in table format"
-        },
-        "rowList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/rowListItem"
-          },
-          "description": "data of table. present if annotation is in table format"
-        }
-      }
-    },
-    "provisionSet": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "filePath": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "string"
-        }
-      }
-    },
-    "permissionLevel": {
-      "type": "string",
-      "enum": [
-        "EDIT",
-        "READONLY",
-        "OWNER",
-        "NONE",
-        "ERROR",
-        "REMOTE_RESTRICTED"
-      ]
-    },
-    "timeout": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      }
-  
-    },
-    "docId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer"
-        }
-      }
-    },
-    "docIds": {
-      "type" : "object",
-      "properties" : {
-        "docIds" : {
-          "type": "array",
-          "items": {
+  "components": {
+    "schemas": {
+      "Document": {
+        "type": "object",
+        "properties": {
+          "docId": {
             "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          },
+          "dir": {
+            "type": "string"
+          },
+          "drm": {
+            "type": "string"
+          },
+          "docStatus": {
+            "type": "string"
+          },
+          "modByUsername": {
+            "type": "string"
+          },
+          "modByName": {
+            "type": "string"
+          },
+          "defaultSum": {
+            "type": "integer"
+          },
+          "modDate": {
+            "type": "date"
+          },
+          "defaultSumStatus": {
+            "type": "string"
+          },
+          "permissionLevel": {
+            "type": "string"
+          },
+          "poorScan": {
+            "type": "boolean"
+          },
+          "failedTableRecognition": {
+            "type": "boolean"
+          },
+          "isDuplicate": {
+            "type": "boolean"
+          },
+          "ocrDone": {
+            "type": "boolean"
+          },
+          "startDate": {
+            "type": "date"
+          },
+          "formId": {
+            "type": "integer"
+          },
+          "isNonContract": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "integer"
+          },
+          "buildingId": {
+            "type": "integer"
+          },
+          "groupId": {
+            "type": "integer"
+          },
+          "orderInGroup": {
+            "type": "integer"
+          },
+          "isMultiVersion": {
+            "type": "boolean"
+          },
+          "score": {
+            "type": "float"
+          },
+          "docVersions": {
+            "type": "array"
+          },
+          "docTypes": {
+            "type": "array"
+          },
+          "tags": {
+            "type": "array"
           }
-        }
-      }
-    },
-    "folder": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
+
         },
-        "subFolders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/folder"
-          }
-        },
-        "permissionLevel": {
-          "$ref": "#/definitions/permissionLevel"
-        }
-      }
-    },
-    "folders": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/folder"
-      }
-    },
-    "groupId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer"
-        }
-      }
-    },
-    "error": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "failureId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "fields": {
-          "type": "string"
-        }
-      }
-    },
-    "get-document-results": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "$ref": "#/definitions/documents"
-        },
-        "next_cursor": {
-          "type": "string",
-          "description": "start pointer of the next page of documents. empty value means it is the last page"
-        }
-      }
-    },
-    "documents": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/docInfo"
-      }
-    },
-    "docInfo": {
-      "type": "object",
-      "required": ["document"],
-      "properties": {
-        "document": {
-          "$ref": "#/definitions/document"
-        },
-        "summary": {
-          "$ref": "#/definitions/document-summary"
-        }
-      }
-    },
-    "document": {
-      "type": "object",
-      "properties": {
-        "docId": {
-          "type": "integer"
-        },
-        "title": {
-          "type": "string"
-        },
-        "filename": {
-          "type": "string"
-        },
-        "dir": {
-          "type": "string"
-        },
-        "file": {
-          "$ref": "#/definitions/filePath"
-        },
-        "drm": {
-          "type": "string"
-        },
-        "docStatus": {
-          "type": "string",
-          "enum": [
-            "PENDING",
-            "OCR",
-            "OCR_ERROR",
-            "PDF_CONVERT",
-            "PDF_CONVERT_ERROR",
-            "READY",
-            "EXTRACTING",
-            "EXTRACTING_ERROR",
-            "SUMMARIZED",
-            "NOT_ANALYZED",
-            "DOWNLOADING",
-            "DOWNLOAD_ERROR",
-            "NON_TEXT_DOCUMENT"
-          ]
-        },
-        "modByUsername": {
-          "type": "string"
-        },
-        "modByName": {
-          "type": "string"
-        },
-        "modDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "permissionLevel": {
-          "type": "string",
-          "enum": [
-            "EDIT",
-            "READONLY",
-            "OWNER",
-            "NONE",
-            "ERROR",
-            "REMOTE_RESTRICTED"
-          ]
-        },
-        "poorScan": {
-          "type": "boolean"
-        },
-        "formId": {
-          "type": "integer"
-        },
-        "isNonContract": {
-          "type": "boolean"
-        },
-        "groupId": {
-          "type": "integer"
-        },
-        "text": {
-          "type": "string",
-          "description": "The plain text of the document (offsets refer to positions in this text). Included when doc-text is true."
-        }
-      }
-    },
-    "document-summary": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "description": "the extracted data and annotations (note that actual fields may vary based on form)",
-          "additionalProperties": true
-        },
-        "modBy": {
-          "type": "object"
-        },
-        "modDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "UNREVIEWED",
-            "IN_PROCESS",
-            "COMPLETE"
-          ]
-        }
-      }
-    },
-    "date": {
-      "type": "object",
-      "properties": {
-        "term_start_date": {
-          "$ref": "#/definitions/term_date"
-        },
-        "term_end_date": {
-          "$ref": "#/definitions/term_date"
-        },
-        "modDate": {
-          "$ref": "#/definitions/mod_date"
-        }
-      }
-    },
-    "term_date": {
-      "type": "object",
-      "properties": {
-        "fromDate": {
-          "type": "string",
-          "description": "date string"
-        },
-        "toDate": {
-          "type": "string",
-          "description": "date string"
-        }
-      }
-    },
-    "mod_date": {
-      "type": "object",
-      "properties": {
-        "fromDate": {
-          "type": "string",
-          "description": "date string"
-        },
-        "toDate": {
-          "type": "string",
-          "description": "date string"
-        }
-      }
-    },
-    "annotationField": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/annotation"
-      }
-    },
-    "textField": {
-      "type": "string",
-      "description": "text of the text field"
-    },
-    "booleanField": {
-      "type": "boolean"
-    },
-    "dropdownField": {
-      "type": "integer",
-      "description": "id of the option selected"
-    },
-    "multiselectField": {
-      "type": "array",
-      "items": {
-        "type": "integer"
-      },
-      "description": "array of option ids selected"
-    },
-    "instructionField": {
-      "type": "string",
-      "description": "text of the instruction field"
-    },
-    "dateField": {
-      "type": "string",
-      "description": "date string of the date field"
-    },
-    "summaryData": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "{annotationField}": {
-              "$ref": "#/definitions/annotationField"
-            },
-            "{textField}": {
-              "$ref": "#/definitions/textField"
-            },
-            "{booleanField}": {
-              "$ref": "#/definitions/booleanField"
-            },
-            "{dropdownField}": {
-              "$ref": "#/definitions/dropdownField"
-            },
-            "{multiselectField}": {
-              "$ref": "#/definitions/multiselectField"
-            },
-            "{instructionField}": {
-              "$ref": "#/definitions/instructionField"
-            },
-            "{dateField}": {
-              "$ref": "#/definitions/dateField"
-            }
-          }
-        }
-      }
-    },
-    "boxListItem": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "description": "page number of the box",
-          "type": "integer"
-        },
-        "x_left": {
-          "type": "integer",
-          "description": "x coordinate of leftmost point"
-        },
-        "x_right": {
-          "type": "integer",
-          "description": "x coordinate of rightmost point"
-        },
-        "y_bottom": {
-          "type": "integer",
-          "description": "y coordinate of bottommost point"
-        },
-        "y_top": {
-          "type": "integer",
-          "description": "y coordinate of topmost point"
-        }
-      }
-    },
-    "rowListItem": {
-      "type": "object",
-      "properties": {
-        "cell_list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/cellListItem"
-          }
-        }
-      }
-    },
-    "cellListItem": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "text value of the cell"
-        },
-        "rowSpan": {
-          "type": "integer",
-          "description": "number of rows a cell spans down"
-        },
-        "colSpan": {
-          "type": "integer",
-          "description": "number of columns a cell spans right"
-        }
-      }
-    },
-    "option": {
-      "type": "object",
-      "description": "Options for multiselect and dropdown type custom fields",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the option"
+        "xml": {
+          "name": "Device"
         }
       }
     }
