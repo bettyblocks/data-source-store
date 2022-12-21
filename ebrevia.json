@@ -135,20 +135,7 @@
           },
           "isMultiVersion": {
             "type": "boolean"
-          },
-          "score": {
-            "type": "float"
-          },
-          "docVersions": {
-            "type": "array"
-          },
-          "docTypes": {
-            "type": "array"
-          },
-          "tags": {
-            "type": "array"
           }
-
         },
         "xml": {
           "name": "Device"
