@@ -55,6 +55,1017 @@
       "ApiKey": []
     }
   ],
+  "paths": {
+    "/projects": {
+      "get": {
+        "summary": "Get a list of accessible projects by the user",
+        "tags": [
+          "project"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of projects",
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "title": "Project Alpha",
+                  "homedir": {
+                    "path": ".../project_alpha"
+                  },
+                  "urlKey": "project_alpha",
+                  "clientId": "CID_1234567890",
+                  "matterId": "MID_1234567890",
+                  "company": {
+                    "id": 1,
+                    "name": "eBrevia",
+                    "urlKey": "ebrevia",
+                    "nlSplit": false,
+                    "isTwoFactor": false
+                  },
+                  "customFields": [],
+                  "product": "DILIGENCE",
+                  "downloadAllowed": true,
+                  "ocrAllImages": false,
+                  "userRoles": {
+                    "admin": "ROLE_STANDARD_USER"
+                  },
+                  "isRemote": false
+                },
+                {
+                  "id": 2,
+                  "title": "Project Beta",
+                  "homedir": {
+                    "path": ".../project_beta"
+                  },
+                  "urlKey": "project_beta",
+                  "clientId": "CID_1234567891",
+                  "matterId": "MID_1234567891",
+                  "company": {
+                    "id": 1,
+                    "name": "eBrevia",
+                    "urlKey": "ebrevia",
+                    "nlSplit": false,
+                    "isTwoFactor": false
+                  },
+                  "customFields": [],
+                  "product": "DILIGENCE",
+                  "downloadAllowed": true,
+                  "ocrAllImages": false,
+                  "userRoles": {
+                    "admin": "ROLE_STANDARD_USER"
+                  },
+                  "isRemote": false
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new project",
+        "tags": [
+          "project"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "access info",
+            "description": "The project to create",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companyName": {
+                  "type": "string",
+                  "description": "full name of company",
+                  "example": "eBrevia"
+                },
+                "languages": {
+                  "description": "array of language codes",
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "en",
+                      "de",
+                      "pt",
+                      "ru",
+                      "es",
+                      "sv",
+                      "fr",
+                      "zh",
+                      "zh-tw",
+                      "ja",
+                      "ko",
+                      "it",
+                      "pl",
+                      "nl",
+                      "fi"
+                    ]
+                  }
+                },
+                "matterName": {
+                  "type": "string",
+                  "description": "full name of the new project",
+                  "example": "Sample Project"
+                },
+                "clientId": {
+                  "type": "string",
+                  "description": "Client ID",
+                  "example": "MMAAHH123456"
+                },
+                "matterId": {
+                  "type": "string",
+                  "description": "Matter ID",
+                  "example": "123456"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A project object",
+            "examples": {
+              "application/json": {
+                "id": 1,
+                "title": "Project Alpha",
+                "homedir": {
+                  "path": ".../project_alpha"
+                },
+                "urlKey": "project_alpha",
+                "clientId": "CID_1234567890",
+                "matterId": "MID_1234567890",
+                "company": {
+                  "id": 1,
+                  "name": "eBrevia",
+                  "urlKey": "ebrevia",
+                  "nlSplit": false,
+                  "isTwoFactor": false
+                },
+                "customFields": [
+                  {
+                    "idNum": 1,
+                    "enabled": true,
+                    "options": [],
+                    "matterId": 1,
+                    "id": "cust_1",
+                    "title": "test_example_provision",
+                    "type": "annotation",
+                    "subFields": []
+                  },
+                  {
+                    "idNum": 2,
+                    "enabled": true,
+                    "options": [],
+                    "matterId": 1,
+                    "id": "cust_2",
+                    "title": "example_provision_2",
+                    "type": "annotation",
+                    "subFields": []
+                  },
+                  {
+                    "idNum": 3,
+                    "enabled": true,
+                    "options": [],
+                    "matterId": 1,
+                    "id": "cust_3",
+                    "title": "example_provision_3",
+                    "type": "annotation",
+                    "subFields": []
+                  },
+                  {
+                    "idNum": 4,
+                    "enabled": true,
+                    "options": [],
+                    "matterId": 1,
+                    "activeModel": {
+                      "id": 7,
+                      "remoteId": 1843,
+                      "name": "new model 2",
+                      "type": "SENTENCE",
+                      "oneBest": false,
+                      "created": "10/19/2018 17:14",
+                      "recall": 0,
+                      "precision": 0,
+                      "score": 0,
+                      "confusionTT": 0,
+                      "confusionTF": 6,
+                      "confusionFT": 0,
+                      "confusionFF": 0,
+                      "fieldId": 4
+                    },
+                    "id": "cust_4",
+                    "title": "base salary",
+                    "type": "annotation",
+                    "subFields": []
+                  }
+                ],
+                "product": "DILIGENCE",
+                "downloadAllowed": true,
+                "ocrAllImages": false,
+                "userRoles": {
+                  "admin": "ROLE_MANAGER"
+                },
+                "isRemote": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectId}": {
+      "parameters": [
+        {
+          "name": "projectId",
+          "in": "path",
+          "description": "project id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "summary": "Get a project by id",
+        "tags": [
+          "project"
+        ],
+        "responses": {
+          "200": {
+            "description": "A project object",
+            "examples": {
+              "application/json": {
+                "id": 1,
+                "title": "Project Alpha",
+                "homedir": {
+                  "path": ".../project_alpha"
+                },
+                "urlKey": "project_alpha",
+                "clientId": "CID_1234567890",
+                "matterId": "MID_1234567890",
+                "company": {
+                  "id": 1,
+                  "name": "eBrevia",
+                  "urlKey": "ebrevia",
+                  "nlSplit": false,
+                  "isTwoFactor": false
+                },
+                "customFields": [],
+                "product": "DILIGENCE",
+                "downloadAllowed": true,
+                "ocrAllImages": false,
+                "userRoles": {
+                  "admin": "ROLE_MANAGER"
+                },
+                "isRemote": false
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a project by id",
+        "tags": [
+          "project"
+        ],
+        "responses": {
+          "200": {
+            "description": "No JSON or text output. Project deleted successfully."
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/folders": {
+      "get": {
+        "summary": "Get all the folders in a project",
+        "tags": [
+          "folder"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "project id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of folders",
+            "schema": {
+              "$ref": "#/definitions/folders"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Aircraft Agreements",
+                  "subFolders": [],
+                  "permissionLevel": "EDIT"
+                },
+                {
+                  "name": "Confidentiality Agreements",
+                  "subFolders": [
+                    {
+                      "name": "testfolder",
+                      "subFolders": [],
+                      "permissionLevel": "EDIT"
+                    }
+                  ],
+                  "permissionLevel": "EDIT"
+                },
+                {
+                  "name": "Employment Agreements",
+                  "subFolders": [],
+                  "permissionLevel": "EDIT"
+                },
+                {
+                  "name": "Leases",
+                  "subFolders": [],
+                  "permissionLevel": "EDIT"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/docs": {
+      "parameters": [
+        {
+          "name": "projectId",
+          "in": "path",
+          "description": "project id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "summary": "Get a list of a project’s documents",
+        "tags": [
+          "document"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of documents",
+            "schema": {
+              "$ref": "#/definitions/rows"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "docId": 4,
+                  "title": "Aircraft Time Sharing Agreement 3.10.09 Morgan Stanley John Mack.pdf",
+                  "filename": "Aircraft Time Sharing Agreement 3.10.09 Morgan Stanley John Mack.pdf",
+                  "dir": "Aircraft Agreements",
+                  "file": {
+                    "path": "...pdf"
+                  },
+                  "drm": "NONE",
+                  "docStatus": "READY",
+                  "modByUsername": "admin",
+                  "modByName": "Sample Admin",
+                  "defaultSum": 3,
+                  "modDate": "Jul 11, 2017",
+                  "defaultSumStatus": "COMPLETE",
+                  "permissionLevel": "EDIT",
+                  "defaultSumFields": "date,insurance,jurisdiction,ea_employment_term,l_mutual_waiver_subrogation,title,amending_agreement,limliability,l_expiration_date,choiceoflaw,l_rent,warranty,term,notice,termination,l_execution_date,l_no_lien,ea_termination_rights,l_term,pricing_salary,l_commencement_date,survival,l_landlord_repair,exclusivity,la_waiver_consequential_damages,l_default_rate,party,assign",
+                  "poorScan": false,
+                  "formId": 1,
+                  "isNonContract": false,
+                  "language": "en",
+                  "docTypes": [
+                    "Confidentiality/Non-Disclosure Agmt.",
+                    "Non-Compete Agmt."
+                  ],
+                  "groupId": 0
+                }
+              ]
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete one or more documents by id",
+        "tags": [
+          "document"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "list of document ids",
+            "required": true,
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 1
+          },
+          {
+            "name": "skipTrash",
+            "in": "query",
+            "description": "delete document immediately without moving it to trash",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No JSON or text output. Documents deleted successfully."
+          },
+          "400": {
+            "description": "Text output shows error messages of deletion failed reasons."
+          }
+        }
+      },
+      "post": {
+        "summary": "Get information about one or more documents",
+        "tags": [
+          "document"
+        ],
+        "parameters": [
+          {
+            "name": "summary",
+            "in": "query",
+            "description": "include summary of the document",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "doc-text",
+            "in": "query",
+            "description": "include full text of the document",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "pagination parameter: number of documents returned per page, maximum count is 100",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "pagination parameter: start pointer of the next page of documents",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The filtering options",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "docIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "folder": {
+                  "type": "string"
+                },
+                "assignees": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "array of assignee usernames",
+                  "example": [
+                    "sampleuser@sample.com"
+                  ]
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "array of data included in the document's summary"
+                },
+                "date": {
+                  "$ref": "#/definitions/date"
+                },
+                "languages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "array of language codes",
+                  "enum": [
+                    "en",
+                    "de",
+                    "pt",
+                    "ru",
+                    "es",
+                    "sv",
+                    "fr",
+                    "zh",
+                    "zh-tw",
+                    "ja",
+                    "ko",
+                    "it"
+                  ]
+                },
+                "parties": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "enum": [
+                    "UNREVIEWED",
+                    "IN_PROCESS",
+                    "COMPLETE",
+                    "OCR_ERROR",
+                    "PDF_CONVERT_ERROR",
+                    "EXTRACTING_ERROR",
+                    "NON_TEXT_DOCUMENT"
+                  ]
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "array of tag names"
+                },
+                "types": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "array of document types"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "information about a document",
+            "schema": {
+              "$ref": "#/definitions/get-document-results"
+            },
+            "examples": {
+              "application/json": {
+                "documents": [
+                  {
+                    "document": {
+                      "docId": 4,
+                      "title": "Aircraft Time Sharing Agreement 3.10.09 Morgan Stanley John Mack.pdf",
+                      "filename": "Aircraft Time Sharing Agreement 3.10.09 Morgan Stanley John Mack.pdf",
+                      "dir": "Aircraft Agreements",
+                      "file": {
+                        "path": "...pdf"
+                      },
+                      "drm": "NONE",
+                      "docStatus": "READY",
+                      "modByUsername": "admin",
+                      "modByName": "Sample Admin",
+                      "defaultSum": 3,
+                      "modDate": "Jul 11, 2017",
+                      "defaultSumStatus": "COMPLETE",
+                      "permissionLevel": "EDIT",
+                      "defaultSumFields": "date,insurance,jurisdiction,ea_employment_term,l_mutual_waiver_subrogation,title,amending_agreement,limliability,l_expiration_date,choiceoflaw,l_rent,warranty,term,notice,termination,l_execution_date,l_no_lien,ea_termination_rights,l_term,pricing_salary,l_commencement_date,survival,l_landlord_repair,exclusivity,la_waiver_consequential_damages,l_default_rate,party,assign",
+                      "poorScan": false,
+                      "formId": 1,
+                      "isNonContract": false,
+                      "language": "en",
+                      "docTypes": [
+                        "Confidentiality/Non-Disclosure Agmt.",
+                        "Non-Compete Agmt."
+                      ],
+                      "groupId": 0,
+                      "text": "This Aircraft Time Sharing Agreement between eBrevia, Inc. and Newco, Inc., dated September 2, 1998..."
+                    },
+                    "summary": {
+                      "data": {
+                        "party": [
+                          {
+                            "start": 29,
+                            "end": 42,
+                            "type": "party",
+                            "id": "0",
+                            "text": "eBrevia, Inc.",
+                            "confidence": 1,
+                            "correctness": "UNKNOWN",
+                            "customText": false,
+                            "manualEntry": false,
+                            "docId": 9243,
+                            "docTitle": "lease1.docx"
+                          },
+                          {
+                            "start": 47,
+                            "end": 58,
+                            "type": "party",
+                            "id": "0",
+                            "text": "Newco, Inc.",
+                            "confidence": 1,
+                            "correctness": "UNKNOWN",
+                            "customText": false,
+                            "manualEntry": false,
+                            "docId": 9243,
+                            "docTitle": "lease1.docx"
+                          }
+                        ],
+                        "date": [
+                          {
+                            "start": 66,
+                            "end": 83,
+                            "type": "date",
+                            "id": "0",
+                            "text": "September 2, 1998",
+                            "confidence": 1,
+                            "correctness": "UNKNOWN",
+                            "customText": false,
+                            "manualEntry": false,
+                            "docId": 9243,
+                            "docTitle": "lease1.docx"
+                          }
+                        ]
+                      },
+                      "modDate": "2017-08-10T03:38:57Z",
+                      "modBy": {
+                        "username": "user",
+                        "name": "Sample User",
+                        "companyId": 1
+                      },
+                      "status": "COMPLETE"
+                    }
+                  }
+                ],
+                "next_cursor": ""
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update properties of one or more documents and/or folders",
+        "tags": [
+          "document"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "Document's properties to update",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "docIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "array of ids of documents to update"
+                },
+                "folders": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "array of folders to update"
+                },
+                "assigneeUsername": {
+                  "type": "string",
+                  "description": "new assignee username"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "new status",
+                  "enum": [
+                    "UNREVIEWED",
+                    "IN_PROCESS",
+                    "COMPLETE"
+                  ]
+                },
+                "formId": {
+                  "type": "integer",
+                  "description": "new form id"
+                },
+                "dir": {
+                  "type": "string",
+                  "description": "path of new folder"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ids of documents that are succesfully updated",
+            "examples": {
+              "application/json": [
+                1,
+                2,
+                3
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/docs/{doc_id}": {
+      "get": {
+        "summary": "Get information about a document",
+        "tags": [
+          "document"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "project id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "doc_id",
+            "in": "path",
+            "description": "document id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "doc-text",
+            "in": "query",
+            "description": "include full text of the document",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "information about a document",
+            "schema": {
+              "$ref": "#/definitions/row"
+            },
+            "examples": {
+              "application/json": {
+                "docId": 4,
+                "title": "Aircraft Time Sharing Agreement 3.10.09 Morgan Stanley John Mack.pdf",
+                "filename": "Aircraft Time Sharing Agreement 3.10.09 Morgan Stanley John Mack.pdf",
+                "dir": "Aircraft Agreements",
+                "file": {
+                  "path": "...pdf"
+                },
+                "drm": "NONE",
+                "docStatus": "READY",
+                "modByUsername": "admin",
+                "modByName": "Sample Admin",
+                "defaultSum": 3,
+                "modDate": "Jul 11, 2017",
+                "defaultSumStatus": "COMPLETE",
+                "permissionLevel": "EDIT",
+                "defaultSumFields": "date,insurance,jurisdiction,ea_employment_term,l_mutual_waiver_subrogation,title,amending_agreement,limliability,l_expiration_date,choiceoflaw,l_rent,warranty,term,notice,termination,l_execution_date,l_no_lien,ea_termination_rights,l_term,pricing_salary,l_commencement_date,survival,l_landlord_repair,exclusivity,la_waiver_consequential_damages,l_default_rate,party,assign",
+                "poorScan": false,
+                "formId": 1,
+                "isNonContract": false,
+                "language": "en",
+                "docTypes": [
+                  "Confidentiality/Non-Disclosure Agmt.",
+                  "Non-Compete Agmt."
+                ],
+                "groupId": 0,
+                "text": "This Aircraft Time Sharing Agreement between eBrevia, Inc. and Newco, Inc., dated September 2, 1998..."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/docs/{docId}/summary": {
+      "parameters": [
+        {
+          "name": "projectId",
+          "in": "path",
+          "description": "project id",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "docId",
+          "in": "path",
+          "description": "document id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "summary": "Get a document’s generated summary information by eBrevia's intelligent analytics",
+        "tags": [
+          "document"
+        ],
+        "responses": {
+          "200": {
+            "description": "summary information from the analytics engine about a document",
+            "schema": {
+              "$ref": "#/definitions/summary"
+            },
+            "examples": {
+              "application/json": {
+                "data": {
+                  "party": [
+                    {
+                      "start": 29,
+                      "end": 42,
+                      "type": "party",
+                      "id": "0",
+                      "text": "eBrevia, Inc.",
+                      "confidence": 1,
+                      "correctness": "UNKNOWN",
+                      "customText": false,
+                      "manualEntry": false,
+                      "docId": 9243,
+                      "docTitle": "lease1.docx"
+                    },
+                    {
+                      "start": 47,
+                      "end": 58,
+                      "type": "party",
+                      "id": "0",
+                      "text": "Newco, Inc.",
+                      "confidence": 1,
+                      "correctness": "UNKNOWN",
+                      "customText": false,
+                      "manualEntry": false,
+                      "docId": 9243,
+                      "docTitle": "lease1.docx"
+                    }
+                  ],
+                  "date": [
+                    {
+                      "start": 66,
+                      "end": 83,
+                      "type": "date",
+                      "id": "0",
+                      "text": "September 2, 1998",
+                      "confidence": 1,
+                      "correctness": "UNKNOWN",
+                      "customText": false,
+                      "manualEntry": false,
+                      "docId": 9243,
+                      "docTitle": "lease1.docx"
+                    }
+                  ]
+                },
+                "modDate": "2017-08-10T03:38:57Z",
+                "modBy": {
+                  "username": "user",
+                  "name": "Sample User",
+                  "companyId": 1
+                },
+                "status": "COMPLETE"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update document summary's field values",
+        "tags": [
+          "document"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "data",
+            "description": "Fields with updated values\n\nReplace field name with actual field name in the summary",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/summaryData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "summary information with updated field values",
+            "schema": {
+              "$ref": "#/definitions/summary"
+            },
+            "examples": {
+              "application/json": {
+                "data": {
+                  "party": [
+                    {
+                      "start": 29,
+                      "end": 42,
+                      "type": "party",
+                      "id": "0",
+                      "text": "eBrevia, Inc.",
+                      "confidence": 1,
+                      "correctness": "UNKNOWN",
+                      "customText": false,
+                      "manualEntry": false,
+                      "docId": 9243,
+                      "docTitle": "lease1.docx"
+                    },
+                    {
+                      "start": 47,
+                      "end": 58,
+                      "type": "party",
+                      "id": "0",
+                      "text": "Newco, Inc.",
+                      "confidence": 1,
+                      "correctness": "UNKNOWN",
+                      "customText": false,
+                      "manualEntry": false,
+                      "docId": 9243,
+                      "docTitle": "lease1.docx"
+                    }
+                  ],
+                  "date": [
+                    {
+                      "start": 66,
+                      "end": 83,
+                      "type": "date",
+                      "id": "0",
+                      "text": "September 2, 1998",
+                      "confidence": 1,
+                      "correctness": "UNKNOWN",
+                      "customText": false,
+                      "manualEntry": false,
+                      "docId": 9243,
+                      "docTitle": "lease1.docx"
+                    }
+                  ]
+                },
+                "modDate": "2017-08-10T03:38:57Z",
+                "modBy": {
+                  "username": "user",
+                  "name": "Sample User",
+                  "companyId": 1
+                },
+                "status": "COMPLETE"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/doc/download/{doc_id}": {
+      "get": {
+        "summary": "Download a single file",
+        "tags": [
+          "document"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "project id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "doc_id",
+            "in": "path",
+            "description": "document id",
+            "required": true,
+            "type": "integer"
+          },
+          
+          {
+            "name": "asPdf",
+            "in": "query",
+            "description": "Download file as pdf, if it exists.If null or false original file will be downloaded",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ]
+          },
+          {
+            "name": "ocr",
+            "in": "query",
+            "description": "Return ocr or original version",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No JSON output. Specify 'Send and Download' in Postman to test download the report."
+          }
+        }
+      }
+    }
+  },
   "responses": {},
   "components": {
     "schemas": {
@@ -135,6 +1146,18 @@
           },
           "isMultiVersion": {
             "type": "boolean"
+          },
+          "score": {
+            "type": "float"
+          },
+          "docVersions": {
+            "type": "array"
+          },
+          "docTypes": {
+            "type": "array"
+          },
+          "tags": {
+            "type": "array"
           }
         },
         "xml": {
