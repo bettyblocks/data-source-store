@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Mixpanel API",
+    "description": "",
+    "contact": {
+      "email": "info@bettyblocks.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://example.betty.app/api/runtime"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Example",
+      "description": "Example"
+    }
+  ],
+  "paths": {
+    "/api/2.0/engage": {
+      "post": {
+        "summary": "Engage API",
+        "operationId": "Example",
+        "responses": {
+          "200": {
+            "description": "Valid response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Profile"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": ["write:users", "read:users"]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "$browser": {"type": "string"},
+          "$browser_version": {"type": "string"},
+          "$city": {"type": "string"},
+          "$country_code": {"type": "string"},
+          "$email": {"type": "string"},
+          "$geo_source": {"type": "string"},
+          "$initial_referrer": {"type": "string"},
+          "$initial_referring_domain": {"type": "string"},
+          "$os": {"type": "string"},
+          "$region": {"type": "string"},
+          "$timezone": {"type": "string"},
+          "Last activity": {"type": "string"},
+          "PDS Start date": {"type": "string"},
+          "Upgrade date": {"type": "string"},
+          "customer_id": {
+            "type": "integer"
+          },
+          "customer_name": {"type": "string"},
+          "hubspot_id": {
+            "type": "integer"
+          },
+          "name": {},
+          "organization_identifier": {},
+          "user_id": {}
+        },
+        "xml": {
+          "name": "Device"
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}
